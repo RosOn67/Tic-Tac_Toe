@@ -1,0 +1,22 @@
+*{
+    box-sizing: border-box;
+    margin: 0px;
+    padding: 0px;
+}
+
+.body{
+    background: rgb(1, 174, 226);
+}
+.board{
+    width: 300px;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: repeat(3, 1fr);
+}
+
+.cell{
+    height: 100px;
+    width: 100px;
+    background: #fff;
+    border: 1px solid black;
+}
