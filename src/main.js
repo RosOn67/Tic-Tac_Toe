@@ -1,4 +1,5 @@
 import "./style.css"
+import { App } from "./app"
 
-console.log("Started");
+App();
 
