@@ -1,19 +1,21 @@
 //game controller module 
 
 import { intitializeBoard } from "./board";
-import { Player_On_Start } from "./player";
+import { Player_On_Start, CPU_Move } from "./player";
 
 function createGame(){   //function to create a game object
-    let gameBoard;
-    let currentPlayer;
-    let startingPlayer;
-    let isCpuPlayer
+    let gameBoard=[];
+    let currentPlayer=null;
+    let startingPlayer=null;
+    let isCpuPlayer=false;
+    let cpuMark;
 
     return{
         gameBoard,
         currentPlayer,
         startingPlayer,
-        isCpuPlayer
+        isCpuPlayer,
+        cpuMark
     }
 };
 
@@ -28,6 +30,11 @@ function startGame(board){
     Game.currentPlayer = Game.startingPlayer;
     console.log("starting current player is",Game.currentPlayer);
     console.log("Initialized Board");
+    //if statrting turn is cpu then let ai make its move in starting and later handler clicks
+    if(Game.isCpuPlayer===true&&Game.currentPlayer === Game.cpuMark){
+        console.log("CPU is making its move");
+        CPU_Move(Game.gameBoard);
+    }
 }
 
 //function to check for wins
@@ -40,18 +47,24 @@ function checkWin(board){
     for(let combn of winningCombinations){
         if(board[combn[0]].textContent==="X"&&board[combn[1]].textContent==="X"&&board[combn[2]].textContent==="X"){
             console.log("X wins the game");
-            return "X";
+            return 1;
         }else if(board[combn[0]].textContent==="O"&&board[combn[1]].textContent==="O"&&board[combn[2]].textContent==="O"){
             console.log("O wins the game");
-            return "O";
+            return 1;
         }
     }
-    board.forEach(cell => {
-        if(cell.textContent === "X" || cell.textContent === "O") {
-            console.log("The game is a draw");
-        }
-    })
+}
+
+    function checkDraw(board) {
+    const isDraw = board.every(cell => cell.textContent === "X" || cell.textContent === "O");
+
+    if (isDraw) {
+        console.log("The game is a draw");
+        // Additional logic for handling the draw state can be added here
+        return 1;
+    }
 }
 
 
-export {Game, startGame, checkWin}
+
+export {Game, startGame, checkWin, checkDraw}

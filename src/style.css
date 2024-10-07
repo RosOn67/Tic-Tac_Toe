@@ -20,3 +20,6 @@
     background: #fff;
     border: 1px solid black;
 }
+.hidden{
+    display: none;
+}
