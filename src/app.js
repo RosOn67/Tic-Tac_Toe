@@ -25,7 +25,7 @@ let Cell_Event_Handler =  function(e){
         placeMark(e.target, Game.currentPlayer);
         e.target.classList.add("marked");
         console.log("Mark Placed");
-        if(checkWin(Game.gameBoard)){
+        if(checkWin(Game.gameBoard, Game.currentPlayer)){
           return 1;
         }
         if(checkDraw(Game.gameBoard)){
@@ -40,6 +40,7 @@ let Cell_Event_Handler =  function(e){
           //while cpu temporarily remove event listener and place back after cpu moves
           console.log("CPU is making its move");
           let CPU_marked_Cell = CPU_Move(Game.gameBoard);
+          checkWin(Game.gameBoard, Game.cpuMark);
           CPU_marked_Cell.removeEventListener("click", Cell_Event_Handler);
         }
 }
@@ -80,12 +81,14 @@ friend_button.addEventListener("click", () => {
 
 asX_button.addEventListener("click", () => {
   if (Game.isCpuPlayer === true) {
+    Game.HumanPlayer = "X";
     Game.cpuMark = "O";
     console.log("CPU got marked O");
   }});
 
 asO_button.addEventListener("click", () => {
   if (Game.isCpuPlayer === true) {
+    Game.HumanPlayer = "O";
     Game.cpuMark = "X";
     console.log("CPU got marked X");
   }

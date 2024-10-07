@@ -9,13 +9,15 @@ function createGame(){   //function to create a game object
     let startingPlayer=null;
     let isCpuPlayer=false;
     let cpuMark;
+    let HumanPlayer;
 
     return{
         gameBoard,
         currentPlayer,
         startingPlayer,
         isCpuPlayer,
-        cpuMark
+        cpuMark,
+        HumanPlayer
     }
 };
 
@@ -38,21 +40,17 @@ function startGame(board){
 }
 
 //function to check for wins
-function checkWin(board){
+function checkWin(board, currentPlayer){
     const winningCombinations = [
         [0, 1, 2], [3, 4, 5], [6, 7, 8], // rows
         [0, 3, 6], [1, 4, 7], [2, 5, 8], // columns
         [0, 4, 8], [2, 4, 6], // diagonals
     ];
     for(let combn of winningCombinations){
-        if(board[combn[0]].textContent==="X"&&board[combn[1]].textContent==="X"&&board[combn[2]].textContent==="X"){
-            console.log("X wins the game");
+        if(board[combn[0]].textContent===currentPlayer&&board[combn[1]].textContent===currentPlayer&&board[combn[2]].textContent===currentPlayer){
+            console.log(currentPlayer, "wins the game");
             return 1;
-        }else if(board[combn[0]].textContent==="O"&&board[combn[1]].textContent==="O"&&board[combn[2]].textContent==="O"){
-            console.log("O wins the game");
-            return 1;
-        }
-    }
+    }}
 }
 
     function checkDraw(board) {
