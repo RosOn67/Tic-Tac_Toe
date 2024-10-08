@@ -23,8 +23,8 @@ function minimax(board, isMaximizingPlayer, depth, maxDepth){
             if(board[i]===""){
                 board[i]=Game.cpuMark;
                 let evalu = minimax(board, false, depth+1, maxDepth);
-                board[i] = "";
                 bestEval = Math.max(evalu, bestEval);
+                board[i] = "";
             }
         }
         return bestEval;
@@ -37,8 +37,8 @@ function minimax(board, isMaximizingPlayer, depth, maxDepth){
             if(board[i]===""){
                 board[i]=Game.HumanPlayer;
                 let evalu = minimax(board, true, depth+1, maxDepth);
-                board[i]  = "";
                 bestEval = Math.min(evalu, bestEval);
+                board[i] = "";
             }
         }
         console.log("Minimax best evaluation is", bestEval)

@@ -38,7 +38,7 @@ function CPU_Move(board) {
     for (let i = 0; i < board.length; ++i) {
         if (board[i] === "") {  
             board[i] = Game.cpuMark; 
-            let score = minimax(board, false, 0, 5);  // Call minimax with depth 5
+            let score = minimax(board, false, 0, 1);  // Call minimax with depth 5
             board[i] = ""; 
 
             // If the current move is better than the previous best, update bestMove

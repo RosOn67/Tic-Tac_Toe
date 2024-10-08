@@ -31,10 +31,10 @@ let Cell_Event_Handler =  function(e){
         //virtual board updated
         e.target.classList.add("marked");
         console.log("Mark Placed");
-        if(checkWin(Game.gameBoard, Game.currentPlayer)){
+        if(checkWin(Vboard, Game.currentPlayer)){ //win checked through vboard cause vboard and gameboard are synced
           return 1;
         }
-        if(checkDraw(Game.gameBoard)){
+        if(checkDraw(Vboard)){
           return 1;
         }
         //after turn update it is time to make next move so check if cpu is playing 

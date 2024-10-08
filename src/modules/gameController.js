@@ -50,14 +50,14 @@ function checkWin(board, currentPlayer){
         [0, 4, 8], [2, 4, 6], // diagonals
     ];
     for(let combn of winningCombinations){
-        if(board[combn[0]].textContent===currentPlayer&&board[combn[1]].textContent===currentPlayer&&board[combn[2]].textContent===currentPlayer){
+        if(board[combn[0]]===currentPlayer&&board[combn[1]]===currentPlayer&&board[combn[2]]===currentPlayer){
             console.log(currentPlayer, "wins the game");
             return 1;
     }}
 }
 
     function checkDraw(board) {
-    const isDraw = board.every(cell => cell.textContent === "X" || cell.textContent === "O");
+    const isDraw = board.every(cell => cell === "X" || cell === "O");
 
     if (isDraw) {
         console.log("The game is a draw");
