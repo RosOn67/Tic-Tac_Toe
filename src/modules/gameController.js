@@ -1,6 +1,6 @@
 //game controller module 
 
-import { intitializeBoard } from "./board";
+import { intitializeBoard, Vboard, placeMark} from "./board";
 import { Player_On_Start, CPU_Move } from "./player";
 
 function createGame(){   //function to create a game object
@@ -35,7 +35,10 @@ function startGame(board){
     //if statrting turn is cpu then let ai make its move in starting and later handler clicks
     if(Game.isCpuPlayer===true&&Game.currentPlayer === Game.cpuMark){
         console.log("CPU is making its move");
-        CPU_Move(Game.gameBoard);
+          let toMark = CPU_Move(Vboard);
+          console.log("toMark", toMark);
+          let CPU_marked_Cell = Game.gameBoard[toMark];
+          placeMark(CPU_marked_Cell, Game.cpuMark);
     }
 }
 

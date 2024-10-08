@@ -1,5 +1,5 @@
 //main game logic goes here
-import { placeMark} from "./modules/board";
+import { placeMark, Vboard} from "./modules/board";
 import { updateTurn,CPU_Move} from "./modules/player";
 import { Game, startGame, checkWin, checkDraw } from "./modules/gameController";
 
@@ -18,11 +18,17 @@ const PlayAsOption = document.getElementById("options-2");
 
 //make gameBoard
 Game.gameBoard = Array.from(document.querySelectorAll("[data-cell]"));
-
+//print virtual baord initially
+console.log(Vboard);
 //event handler for cells
 let Cell_Event_Handler =  function(e){
         console.log("Current Player is",Game.currentPlayer);
         placeMark(e.target, Game.currentPlayer);
+        //for virtual board
+        let index = Game.gameBoard.findIndex(cell =>cell == e.target);
+        Vboard[index] = Game.currentPlayer;
+        console.log(Vboard);
+        //virtual board updated
         e.target.classList.add("marked");
         console.log("Mark Placed");
         if(checkWin(Game.gameBoard, Game.currentPlayer)){
@@ -39,9 +45,14 @@ let Cell_Event_Handler =  function(e){
         if(Game.isCpuPlayer===true&&Game.currentPlayer ===Game.cpuMark){
           //while cpu temporarily remove event listener and place back after cpu moves
           console.log("CPU is making its move");
-          let CPU_marked_Cell = CPU_Move(Game.gameBoard);
-          checkWin(Game.gameBoard, Game.cpuMark);
+          let toMark = CPU_Move(Vboard);
+          console.log("toMark", toMark);
+          let CPU_marked_Cell = Game.gameBoard[toMark];
+          placeMark(CPU_marked_Cell, Game.cpuMark);
+          console.log(Vboard);
           CPU_marked_Cell.removeEventListener("click", Cell_Event_Handler);
+          checkWin(Game.gameBoard, Game.cpuMark);
+          
         }
 }
 
@@ -55,12 +66,16 @@ restart_button.addEventListener("click",() =>{
         cell.removeEventListener("click",Cell_Event_Handler);
         console.log("removed handler");
     })
+    for (let i = 0; i < Vboard.length; i++) {
+    Vboard[i] = "";  // Set each element in Vboard to an empty string
+    }
+    console.log("After restarting",Vboard);
     startGame(Game.gameBoard);
     Game.gameBoard.forEach(cell=>{
         cell.addEventListener("click",Cell_Event_Handler,{once:true});
         console.log("readded handler");
     })
-    // startGame(Game.gameBoard);
+
 });
 
 Game.gameBoard.forEach((cell)=>{

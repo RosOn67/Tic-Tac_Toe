@@ -1,5 +1,5 @@
 //methods for board
-
+let Vboard = ["", "", "", "", "", "", "", "", ""]; //a array to represent board
 //function to intitialize board
 function intitializeBoard(board){ //initialize board with empty cell
     board.forEach((cell)=>{
@@ -16,4 +16,4 @@ function placeMark(cell, currentPlayer){
     (currentPlayer === "X")?cell.textContent="X": cell.textContent = "O";
 }
 
-export{intitializeBoard, placeMark}
+export{intitializeBoard, placeMark, Vboard}
