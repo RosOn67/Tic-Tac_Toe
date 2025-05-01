@@ -31,11 +31,13 @@ let Cell_Event_Handler =  function(e){
         //virtual board updated
         e.target.classList.add("marked");
         console.log("Mark Placed");
-        if(checkWin(Vboard, Game.currentPlayer)){ //win checked through vboard cause vboard and gameboard are synced
-          return 1;
+        if(checkWin(Vboard, Game.currentPlayer)){
+          console.log(Game.currentPlayer, "wins the game hurray"); //win checked through vboard cause vboard and gameboard are synced
+          return;
         }
         if(checkDraw(Vboard)){
-          return 1;
+          console.log("the game is a draw");
+          return ;
         }
         //after turn update it is time to make next move so check if cpu is playing 
         //and make its move after user clicks on desired cell and add a certain delay
@@ -49,10 +51,20 @@ let Cell_Event_Handler =  function(e){
           console.log("toMark", toMark);
           let CPU_marked_Cell = Game.gameBoard[toMark];
           placeMark(CPU_marked_Cell, Game.cpuMark);
+          CPU_marked_Cell.classList.add("marked");
           console.log(Vboard);
           CPU_marked_Cell.removeEventListener("click", Cell_Event_Handler);
-          checkWin(Game.gameBoard, Game.cpuMark);
           
+
+          if(checkWin(Vboard, Game.currentPlayer)){
+            console.log(Game.currentPlayer, "wins the game hurray"); //win checked through vboard cause vboard and gameboard are synced
+            return;
+          }
+          if(checkDraw(Vboard)){
+            console.log("the game is a draw");
+            return ;
+          }
+          updateTurn(Game.currentPlayer); //update turn only after continuing 
         }
 }
 
@@ -112,3 +124,10 @@ asO_button.addEventListener("click", () => {
 }
 
 export {App};
+
+
+//i should make a function to handle moves
+//seperate dom manipulation and game logic(make seperate modules and functions) 
+//handle events and state more carefully(all messed here)
+
+//Somewhat iam trying to make modular making different functions but could do better 

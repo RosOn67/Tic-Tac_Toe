@@ -9,28 +9,9 @@ function updateTurn(currentPlayer){
     (currentPlayer=="X")?Game.currentPlayer="O":Game.currentPlayer="X";
 }
 
-// //Cpu move function
-// function CPU_Move(board){ //the board i am using here will be virtual boards
-//     let bestScore = -Infinity;
-//     let bestMove = null;
-
-//     for(let i=0; i<board.length; ++i){
-//         if(board[i]===""){
-//             board[i] = Game.cpuMark;
-//             let score = minimax(board, false, 5); ///calling minimax function with depth 5
-//             board[i] = "";
-//             if(score>bestScore){
-//                 bestScore = score;
-//                 bestMove = i;
-//             }
-//         }
-//     }
-//     board[bestMove] = Game.cpuMark;
-//     console.log(board);
-//     updateTurn(Game.currentPlayer);
-//     return bestMove;  //the board iam referencing here is virtual baord 
 // }
 function CPU_Move(board) {
+    //add a timeout to cpu move
     let bestScore = -Infinity;  // To track the highest score
     let bestMove = null;        // To store the index of the best move
 
@@ -50,7 +31,6 @@ function CPU_Move(board) {
     }
         console.log("CPU selected best move", bestMove);
         board[bestMove] = Game.cpuMark;  // Make the best move on the virtual board
-        updateTurn(Game.currentPlayer);
         return bestMove;  // Return the index of the best move
     }
 

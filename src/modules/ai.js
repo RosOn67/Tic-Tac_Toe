@@ -11,7 +11,7 @@ function minimax(board, isMaximizingPlayer, depth, maxDepth){
     else if(checkWin(board, Game.HumanPlayer)){ //human player wins i.e CPU which is maximixing loses
         return -1;
     }
-    else if(checkDraw(board)||depth===maxDepth){ //draw no one wins
+    else if(checkDraw(board)||depth===maxDepth){ // no one wins
         return 0;
     }
 
@@ -41,7 +41,6 @@ function minimax(board, isMaximizingPlayer, depth, maxDepth){
                 board[i] = "";
             }
         }
-        console.log("Minimax best evaluation is", bestEval)
         return bestEval;
     }
     

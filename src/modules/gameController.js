@@ -51,7 +51,6 @@ function checkWin(board, currentPlayer){
     ];
     for(let combn of winningCombinations){
         if(board[combn[0]]===currentPlayer&&board[combn[1]]===currentPlayer&&board[combn[2]]===currentPlayer){
-            console.log(currentPlayer, "wins the game");
             return 1;
     }}
 }
@@ -60,7 +59,6 @@ function checkWin(board, currentPlayer){
     const isDraw = board.every(cell => cell === "X" || cell === "O");
 
     if (isDraw) {
-        console.log("The game is a draw");
         // Additional logic for handling the draw state can be added here
         return 1;
     }
